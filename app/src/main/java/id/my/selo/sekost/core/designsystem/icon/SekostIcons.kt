@@ -147,6 +147,22 @@ object SekostIcons {
         )
     }
     val Moon by lazy { lineIcon("Moon", "M19.5 14.5A7.5 7.5 0 0 1 9.5 4.5a7.5 7.5 0 1 0 10 10z") }
+    val Sun by lazy {
+        lineIcon(
+            "Sun",
+            "M12 8.25a3.75 3.75 0 1 0 0 7.5a3.75 3.75 0 1 0 0-7.5z",
+            "M12 3.5v1.5M12 19v1.5M3.5 12H5M19 12h1.5",
+            "M6 6l1.05 1.05M16.95 16.95L18 18M6 18l1.05-1.05M16.95 7.05L18 6",
+        )
+    }
+    val Device by lazy {
+        lineIcon(
+            "Device",
+            "M7 3.75h10c.55 0 1 .45 1 1v14.5c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1V4.75c0-.55.45-1 1-1z",
+            "M12 7.5v9",
+            "M10.75 17.75h2.5",
+        )
+    }
     val Plus by lazy { lineIcon("Plus", "M12 5v14M5 12h14") }
     val Minus by lazy { lineIcon("Minus", "M5 12h14") }
     val Check by lazy { lineIcon("Check", "M5 12.5l4.5 4.5L19 7.5") }

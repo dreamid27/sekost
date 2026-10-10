@@ -8,6 +8,7 @@ tenants and payments, and keep on top of maintenance and complaints.
 
 | Area | What you can do |
 | --- | --- |
+| Onboarding | First-run setup: owner name, global fee (with quick picks), due day, theme (applied live), then start empty or with sample data |
 | Properties | Create kost / rumah sewa, address, optional property-wide default fee |
 | Rooms | Label rooms (with floor/block and notes), status **Kosong / Terisi / Perawatan**, filter by status |
 | Fees | Three-level fee: **room override → property default → global setting** (always shows its source) |
@@ -17,7 +18,10 @@ tenants and payments, and keep on top of maintenance and complaints.
 | Dashboard | Monthly income vs expected, occupancy ring, unpaid & open-issue shortcuts |
 | Settings | Owner name (greeting), global fee, due day, light / dark / system theme |
 
-A first-run **"Coba dengan data contoh"** button seeds a realistic portfolio for exploring.
+New installs open a short animated **onboarding** (welcome → name → fee & due day → theme → summary).
+It only shows when onboarding was never completed *and* there are no properties, so existing users
+skip it. The last step (and the empty dashboard) offers **"data contoh"**, which seeds a realistic
+portfolio for exploring.
 
 ## Tech stack
 
@@ -66,7 +70,7 @@ app/src/main/java/id/my/selo/sekost/
 │   ├── ui/              # shared presentation helpers (enum → label/tone/icon, IssueCard)
 │   └── common/          # formatting: Rupiah, Indonesian dates
 └── feature/
-    ├── home/  property/  room/  billing/  issues/  settings/
+    ├── onboarding/  home/  property/  room/  billing/  issues/  settings/
     │   └── <Feature>Screen.kt  <Feature>ViewModel.kt  [sheets]
 app/schemas/             # exported Room schemas (commit these; needed for migrations)
 app/src/test/            # JVM tests + testing/ (fakes, MainDispatcherRule)
@@ -104,7 +108,10 @@ so stock M3 widgets stay on-brand.
 the mark. Stroke is black and tinted by `Icon`.
 
 **Illustrations.** Flat, outline-free scenes (house, open door + key, wallet + coins, potted plant)
-drawn on Canvas from theme tokens, so they adapt to dark mode automatically.
+drawn on Canvas from theme tokens, so they adapt to dark mode automatically. Onboarding adds
+animated scenes (`OnboardingIllustrations.kt`): a one-shot entrance plus a slow ambient loop, read
+in the draw phase so motion never recomposes. Some react to input — the nameplate shows the
+owner's initials, the calendar highlights the chosen due day, the sun morphs into a moon.
 
 ## Code conventions
 
@@ -129,9 +136,13 @@ drawn on Canvas from theme tokens, so they adapt to dark mode automatically.
 | Suite | Location | Covers |
 | --- | --- | --- |
 | Domain | `src/test/.../core` | Rupiah formatting, fee precedence, overview joins, portfolio summary |
-| ViewModels | `src/test/.../feature` | Home (seeding is idempotent), Room detail (fee override, check-in/out, payments, issues, overdue), Billing (filters, month navigation, move-in rules) |
+| ViewModels | `src/test/.../feature` | Onboarding (step flow, fee validation, atomic save, sample data, who sees it), Home (seeding is idempotent), Room detail (fee override, check-in/out, payments, issues, overdue), Billing (filters, month navigation, move-in rules) |
 | Data | `src/androidTest/.../core/data` | Room: upsert ids, check-in/out transactions, one payment per room per month, cascade deletes, issue lifecycle |
 | UI | `src/androidTest/.../core/designsystem` | SegmentedPicker selection, MoneyTextField digit filtering & formatting |
 
 ViewModel tests run against in-memory fakes (`testing/FakeRepositories.kt`, wired by
 `FakeDataGraph`) that honor the same contracts as the Room implementations.
+
+## Deployment
+
+Test builds ship through Firebase App Distribution. See [DEPLOYMENT.md](DEPLOYMENT.md).

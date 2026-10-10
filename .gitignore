@@ -14,3 +14,10 @@
 .cxx
 local.properties
 .kotlin
+
+# Release signing (never commit)
+/keystore/
+keystore.properties
+
+# Firebase CLI cache
+.firebase/

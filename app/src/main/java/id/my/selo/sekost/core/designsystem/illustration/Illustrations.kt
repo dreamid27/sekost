@@ -30,11 +30,11 @@ import id.my.selo.sekost.core.designsystem.theme.SekostTheme
  * from theme tokens so the art follows light/dark mode automatically.
  */
 
-private const val VIEW_W = 240f
-private const val VIEW_H = 180f
+internal const val VIEW_W = 240f
+internal const val VIEW_H = 180f
 
 @Immutable
-private data class Ink(
+internal data class Ink(
     val blob: Color,
     val wall: Color,
     val wallShade: Color,
@@ -47,9 +47,11 @@ private data class Ink(
     val sun: Color,
     val ground: Color,
     val sparkle: Color,
+    val berry: Color,
+    val sky: Color,
 )
 
-private fun SekostColors.ink() = Ink(
+internal fun SekostColors.ink() = Ink(
     blob = brandContainer,
     wall = surfaceRaised,
     wallShade = surfaceSunken,
@@ -62,6 +64,8 @@ private fun SekostColors.ink() = Ink(
     sun = maintenance.content,
     ground = outline,
     sparkle = maintenance.content,
+    berry = complaint.content,
+    sky = vacant.content,
 )
 
 @Composable
@@ -202,7 +206,7 @@ fun BrandMark(modifier: Modifier = Modifier, size: Dp = 40.dp) {
 
 // ——— drawing helpers ———
 
-private fun DrawScope.blob(color: Color) {
+internal fun DrawScope.blob(color: Color) {
     val p = Path().apply {
         moveTo(40f, 100f)
         cubicTo(30f, 50f, 90f, 18f, 140f, 24f)
@@ -214,15 +218,15 @@ private fun DrawScope.blob(color: Color) {
     drawPath(p, color)
 }
 
-private fun DrawScope.ground(color: Color) =
+internal fun DrawScope.ground(color: Color) =
     drawLine(color, Offset(34f, 155f), Offset(206f, 155f), 3f, cap = StrokeCap.Round)
 
-private fun path(vararg points: Pair<Float, Float>) = Path().apply {
+internal fun path(vararg points: Pair<Float, Float>) = Path().apply {
     points.forEachIndexed { i, (x, y) -> if (i == 0) moveTo(x, y) else lineTo(x, y) }
     close()
 }
 
-private fun archPath(left: Float, top: Float, width: Float, bottom: Float) = Path().apply {
+internal fun archPath(left: Float, top: Float, width: Float, bottom: Float) = Path().apply {
     val r = width / 2
     moveTo(left, bottom)
     lineTo(left, top + r)
@@ -231,16 +235,16 @@ private fun archPath(left: Float, top: Float, width: Float, bottom: Float) = Pat
     close()
 }
 
-private fun DrawScope.archDoor(color: Color, left: Float, top: Float, width: Float, bottom: Float) =
+internal fun DrawScope.archDoor(color: Color, left: Float, top: Float, width: Float, bottom: Float) =
     drawPath(archPath(left, top, width, bottom), color)
 
-private fun DrawScope.window(ink: Ink, left: Float, top: Float) {
+internal fun DrawScope.window(ink: Ink, left: Float, top: Float) {
     drawRoundRect(ink.glass, Offset(left, top), Size(18f, 20f), CornerRadius(3f))
     drawLine(ink.wall, Offset(left + 9f, top), Offset(left + 9f, top + 20f), 2f)
     drawLine(ink.wall, Offset(left, top + 10f), Offset(left + 18f, top + 10f), 2f)
 }
 
-private fun DrawScope.leaf(color: Color, base: Offset, length: Float, angle: Float) {
+internal fun DrawScope.leaf(color: Color, base: Offset, length: Float, angle: Float) {
     rotate(angle, base) {
         val p = Path().apply {
             moveTo(base.x, base.y)
@@ -252,14 +256,14 @@ private fun DrawScope.leaf(color: Color, base: Offset, length: Float, angle: Flo
     }
 }
 
-private fun DrawScope.leafBush(ink: Ink, x: Float, groundY: Float, mirror: Boolean = false) {
+internal fun DrawScope.leafBush(ink: Ink, x: Float, groundY: Float, mirror: Boolean = false) {
     val dir = if (mirror) -1f else 1f
     leaf(ink.leaf, Offset(x, groundY), 30f, -20f * dir)
     leaf(ink.leafLight, Offset(x, groundY), 22f, 28f * dir)
     leaf(ink.leaf, Offset(x, groundY), 18f, -58f * dir)
 }
 
-private fun DrawScope.sparkle(color: Color, cx: Float, cy: Float, r: Float) {
+internal fun DrawScope.sparkle(color: Color, cx: Float, cy: Float, r: Float) {
     val p = Path().apply {
         moveTo(cx, cy - r)
         quadraticTo(cx, cy, cx + r, cy)

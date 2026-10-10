@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
@@ -36,12 +37,14 @@ import id.my.selo.sekost.core.designsystem.theme.SekostTheme
 import id.my.selo.sekost.feature.billing.BillingRoute
 import id.my.selo.sekost.feature.home.HomeRoute
 import id.my.selo.sekost.feature.issues.IssuesRoute
+import id.my.selo.sekost.feature.onboarding.OnboardingRoute
 import id.my.selo.sekost.feature.property.PropertyDetailRoute
 import id.my.selo.sekost.feature.room.RoomDetailRoute
 import id.my.selo.sekost.feature.settings.SettingsRoute
 import id.my.selo.sekost.navigation.BillingRoute
 import id.my.selo.sekost.navigation.HomeRoute
 import id.my.selo.sekost.navigation.IssuesRoute
+import id.my.selo.sekost.navigation.OnboardingRoute
 import id.my.selo.sekost.navigation.PropertyRoute
 import id.my.selo.sekost.navigation.RoomRoute
 import id.my.selo.sekost.navigation.SettingsRoute
@@ -55,7 +58,7 @@ enum class TopLevelDestination(val route: Any, val routeClass: KClass<*>, val ic
 }
 
 @Composable
-fun SekostApp(navController: NavHostController = rememberNavController()) {
+fun SekostApp(startWithOnboarding: Boolean = false, navController: NavHostController = rememberNavController()) {
     val backStack by navController.currentBackStackEntryAsState()
     val destination = backStack?.destination
     val currentTopLevel = TopLevelDestination.entries.firstOrNull { destination.isOn(it.routeClass) }
@@ -78,7 +81,7 @@ fun SekostApp(navController: NavHostController = rememberNavController()) {
         },
     ) { padding ->
         Box(Modifier.fillMaxSize().padding(padding)) {
-            SekostNavHost(navController)
+            SekostNavHost(navController, startWithOnboarding)
             // Translucent scrim so scrolled content never collides with status bar icons.
             Box(
                 Modifier
@@ -91,17 +94,28 @@ fun SekostApp(navController: NavHostController = rememberNavController()) {
 }
 
 @Composable
-private fun SekostNavHost(navController: NavHostController) {
+private fun SekostNavHost(navController: NavHostController, startWithOnboarding: Boolean) {
     val duration = SekostTheme.motion.slow
     val openRoom: (Long) -> Unit = { navController.navigate(RoomRoute(it)) }
     NavHost(
         navController = navController,
-        startDestination = HomeRoute,
+        startDestination = if (startWithOnboarding) OnboardingRoute else HomeRoute,
         enterTransition = { fadeIn(tween(duration)) + slideInHorizontally(tween(duration)) { it / 6 } },
         exitTransition = { fadeOut(tween(duration / 2)) },
         popEnterTransition = { fadeIn(tween(duration)) },
         popExitTransition = { fadeOut(tween(duration / 2)) + slideOutHorizontally(tween(duration)) { it / 6 } },
     ) {
+        composable<OnboardingRoute>(
+            exitTransition = { fadeOut(tween(duration)) + scaleOut(tween(duration), targetScale = ONBOARDING_EXIT_SCALE) },
+        ) {
+            OnboardingRoute(
+                onFinished = {
+                    navController.navigate(HomeRoute) {
+                        popUpTo<OnboardingRoute> { inclusive = true }
+                    }
+                },
+            )
+        }
         topLevel<HomeRoute> {
             HomeRoute(
                 onOpenProperty = { navController.navigate(PropertyRoute(it)) },
@@ -122,6 +136,7 @@ private fun SekostNavHost(navController: NavHostController) {
 }
 
 private const val TAB_FADE_MS = 200
+private const val ONBOARDING_EXIT_SCALE = 1.04f
 
 /** Tabs cross-fade instead of sliding, so switching feels like a view change, not navigation. */
 private inline fun <reified T : Any> androidx.navigation.NavGraphBuilder.topLevel(

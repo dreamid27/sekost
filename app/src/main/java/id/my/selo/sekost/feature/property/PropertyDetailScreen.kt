@@ -54,6 +54,7 @@ import id.my.selo.sekost.core.designsystem.component.ToneBadge
 import id.my.selo.sekost.core.designsystem.icon.SekostIcons
 import id.my.selo.sekost.core.designsystem.illustration.DoorIllustration
 import id.my.selo.sekost.core.designsystem.theme.SekostTheme
+import id.my.selo.sekost.core.domain.RoomBatch
 import id.my.selo.sekost.core.domain.RoomOverview
 import id.my.selo.sekost.core.model.RoomStatus
 import id.my.selo.sekost.core.ui.labelRes
@@ -76,6 +77,7 @@ fun PropertyDetailRoute(
             onFilter = viewModel::setFilter,
             onSaveProperty = viewModel::saveProperty,
             onSaveRoom = viewModel::saveRoom,
+            onAddRooms = viewModel::addRooms,
             onDelete = { viewModel.deleteProperty(onBack) },
         )
     }
@@ -89,6 +91,7 @@ fun PropertyDetailScreen(
     onFilter: (RoomStatus?) -> Unit,
     onSaveProperty: (id.my.selo.sekost.core.model.Property) -> Unit,
     onSaveRoom: (id.my.selo.sekost.core.model.Room) -> Unit,
+    onAddRooms: (labels: List<String>, floor: String) -> Unit,
     onDelete: () -> Unit,
 ) {
     var showPropertyEditor by rememberSaveable { mutableStateOf(false) }
@@ -183,10 +186,15 @@ fun PropertyDetailScreen(
         RoomEditorSheet(
             initial = null,
             propertyId = property.id,
-            suggestedLabel = "Kamar ${(state.summary.totalRooms + 1).toString().padStart(2, '0')}",
+            suggestedLabel = RoomBatch.labels("Kamar", RoomBatch.nextNumber("Kamar", state.roomLabels), 1).firstOrNull().orEmpty(),
+            existingLabels = state.roomLabels,
             onDismiss = { showRoomEditor = false },
             onSave = {
                 onSaveRoom(it)
+                showRoomEditor = false
+            },
+            onSaveBatch = { labels, floor ->
+                onAddRooms(labels, floor)
                 showRoomEditor = false
             },
         )

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "929635600442",
+    "project_id": "sekost-app",
+    "storage_bucket": "sekost-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929635600442:android:57f5e20b18bce56b0a8d03",
+        "android_client_info": {
+          "package_name": "id.my.selo.sekost"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL5d6K7gChEHmxdDNAxKwnY2A8TgM9tAM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929635600442:android:12835287ecbe7b600a8d03",
+        "android_client_info": {
+          "package_name": "id.my.selo.sekost.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL5d6K7gChEHmxdDNAxKwnY2A8TgM9tAM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

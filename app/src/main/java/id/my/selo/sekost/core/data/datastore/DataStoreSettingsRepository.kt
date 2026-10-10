@@ -2,6 +2,7 @@ package id.my.selo.sekost.core.data.datastore
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
@@ -23,6 +24,7 @@ internal class DataStoreSettingsRepository @Inject constructor(
             globalMonthlyFee = prefs[Keys.GlobalFee] ?: AppSettings.DEFAULT_GLOBAL_FEE,
             dueDay = prefs[Keys.DueDay] ?: AppSettings.DEFAULT_DUE_DAY,
             themeMode = prefs[Keys.Theme]?.let { runCatching { ThemeMode.valueOf(it) }.getOrNull() } ?: ThemeMode.SYSTEM,
+            onboardingCompleted = prefs[Keys.OnboardingCompleted] ?: false,
         )
     }
 
@@ -30,6 +32,13 @@ internal class DataStoreSettingsRepository @Inject constructor(
     override suspend fun setGlobalMonthlyFee(fee: Long) = edit { it[Keys.GlobalFee] = fee.coerceAtLeast(0) }
     override suspend fun setDueDay(day: Int) = edit { it[Keys.DueDay] = day.coerceIn(1, 28) }
     override suspend fun setThemeMode(mode: ThemeMode) = edit { it[Keys.Theme] = mode.name }
+
+    override suspend fun completeOnboarding(ownerName: String, globalMonthlyFee: Long, dueDay: Int) = edit {
+        it[Keys.OwnerName] = ownerName.trim()
+        it[Keys.GlobalFee] = globalMonthlyFee.coerceAtLeast(0)
+        it[Keys.DueDay] = dueDay.coerceIn(1, 28)
+        it[Keys.OnboardingCompleted] = true
+    }
 
     private suspend fun edit(block: (androidx.datastore.preferences.core.MutablePreferences) -> Unit) {
         dataStore.edit(block)
@@ -40,5 +49,6 @@ internal class DataStoreSettingsRepository @Inject constructor(
         val GlobalFee = longPreferencesKey("global_monthly_fee")
         val DueDay = intPreferencesKey("due_day")
         val Theme = stringPreferencesKey("theme_mode")
+        val OnboardingCompleted = booleanPreferencesKey("onboarding_completed")
     }
 }

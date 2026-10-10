@@ -2,6 +2,8 @@ package id.my.selo.sekost.navigation
 
 import kotlinx.serialization.Serializable
 
+@Serializable data object OnboardingRoute
+
 @Serializable data object HomeRoute
 
 @Serializable data object BillingRoute

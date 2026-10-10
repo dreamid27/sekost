@@ -45,6 +45,14 @@ data class SekostSizes(
     val buttonHeight: Dp = 52.dp,
     val chipHeight: Dp = 32.dp,
     val hairline: Dp = 1.dp,
+    /** A day in the due-day picker (7 per row). */
+    val dayCell: Dp = 40.dp,
+    /** Height of a miniature app preview (theme picker). */
+    val themePreview: Dp = 148.dp,
+    /** Thickness of the onboarding step indicator. */
+    val stepIndicator: Dp = 6.dp,
+    /** Width of the hero illustration on onboarding steps. */
+    val onboardingArt: Dp = 240.dp,
 )
 
 /** Motion durations in milliseconds. */

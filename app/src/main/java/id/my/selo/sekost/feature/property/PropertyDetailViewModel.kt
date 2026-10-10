@@ -34,6 +34,8 @@ sealed interface PropertyDetailUiState {
         val filter: RoomStatus?,
         val rooms: List<RoomOverview>,
         val counts: Map<RoomStatus, Int>,
+        /** Every room label in this property regardless of [filter], for numbering new rooms. */
+        val roomLabels: List<String>,
     ) : PropertyDetailUiState
 }
 
@@ -65,6 +67,7 @@ class PropertyDetailViewModel @Inject constructor(
             filter = statusFilter,
             rooms = if (statusFilter == null) own else own.filter { it.room.status == statusFilter },
             counts = RoomStatus.entries.associateWith { s -> own.count { it.room.status == s } },
+            roomLabels = own.map { it.room.label },
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), PropertyDetailUiState.Loading)
 
@@ -78,6 +81,13 @@ class PropertyDetailViewModel @Inject constructor(
 
     fun saveRoom(room: Room) {
         viewModelScope.launch { rooms.save(room.copy(propertyId = propertyId)) }
+    }
+
+    fun addRooms(labels: List<String>, floor: String) {
+        if (labels.isEmpty()) return
+        viewModelScope.launch {
+            rooms.saveAll(labels.map { Room(propertyId = propertyId, label = it, floor = floor) })
+        }
     }
 
     fun deleteProperty(onDeleted: () -> Unit) {

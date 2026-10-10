@@ -24,10 +24,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val splash = installSplashScreen()
         super.onCreate(savedInstanceState)
-        splash.setKeepOnScreenCondition { viewModel.themeMode.value == null }
+        splash.setKeepOnScreenCondition { viewModel.themeMode.value == null || viewModel.startWithOnboarding.value == null }
 
         setContent {
             val mode by viewModel.themeMode.collectAsStateWithLifecycle()
+            val startWithOnboarding by viewModel.startWithOnboarding.collectAsStateWithLifecycle()
             val dark = when (mode) {
                 ThemeMode.LIGHT -> false
                 ThemeMode.DARK -> true
@@ -42,7 +43,9 @@ class MainActivity : ComponentActivity() {
                 enableEdgeToEdge(statusBarStyle = style, navigationBarStyle = style)
                 onDispose {}
             }
-            SekostTheme(darkTheme = dark) { SekostApp() }
+            SekostTheme(darkTheme = dark) {
+                startWithOnboarding?.let { SekostApp(startWithOnboarding = it) }
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 package id.my.selo.sekost.core.data.database.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Upsert
 import id.my.selo.sekost.core.data.database.entity.RoomEntity
@@ -18,6 +19,10 @@ interface RoomDao {
 
     @Upsert
     suspend fun upsert(room: RoomEntity): Long
+
+    /** Inserts in a single transaction, so a batch of rooms appears all at once or not at all. */
+    @Insert
+    suspend fun insertAll(rooms: List<RoomEntity>): List<Long>
 
     @Query("UPDATE rooms SET status = :status WHERE id = :id")
     suspend fun updateStatus(id: Long, status: RoomStatus)

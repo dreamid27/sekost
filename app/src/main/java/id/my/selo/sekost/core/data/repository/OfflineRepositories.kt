@@ -39,6 +39,7 @@ internal class OfflineRoomRepository @Inject constructor(
     override fun observeAll() = dao.observeAll().map { list -> list.map { it.asModel() } }
     override fun observe(id: Long) = dao.observe(id).map { it?.asModel() }
     override suspend fun save(room: Room) = dao.upsert(room.asEntity()).let { if (it == -1L) room.id else it }
+    override suspend fun saveAll(rooms: List<Room>) = dao.insertAll(rooms.map { it.asEntity() })
     override suspend fun setStatus(id: Long, status: RoomStatus) = dao.updateStatus(id, status)
     override suspend fun setCustomFee(id: Long, fee: Long?) = dao.updateCustomFee(id, fee)
     override suspend fun delete(id: Long) = dao.delete(id)

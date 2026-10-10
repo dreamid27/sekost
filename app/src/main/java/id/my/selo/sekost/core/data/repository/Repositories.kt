@@ -29,6 +29,9 @@ interface RoomRepository {
     fun observeAll(): Flow<List<Room>>
     fun observe(id: Long): Flow<Room?>
     suspend fun save(room: Room): Long
+
+    /** Creates several new rooms atomically. */
+    suspend fun saveAll(rooms: List<Room>): List<Long>
     suspend fun setStatus(id: Long, status: RoomStatus)
     suspend fun setCustomFee(id: Long, fee: Long?)
     suspend fun delete(id: Long)
@@ -69,4 +72,7 @@ interface SettingsRepository {
     suspend fun setGlobalMonthlyFee(fee: Long)
     suspend fun setDueDay(day: Int)
     suspend fun setThemeMode(mode: ThemeMode)
+
+    /** Saves the first-run setup and marks onboarding as done, in one atomic write. */
+    suspend fun completeOnboarding(ownerName: String, globalMonthlyFee: Long, dueDay: Int)
 }

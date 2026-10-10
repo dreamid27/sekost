@@ -56,6 +56,11 @@ class FakeRoomRepository : RoomRepository {
         items.update { list -> list.filterNot { it.id == id } + room.copy(id = id) }
         return id
     }
+    override suspend fun saveAll(rooms: List<Room>): List<Long> {
+        val created = rooms.map { it.copy(id = nextId++) }
+        items.update { it + created }
+        return created.map { it.id }
+    }
     override suspend fun setStatus(id: Long, status: RoomStatus) = modify(id) { it.copy(status = status) }
     override suspend fun setCustomFee(id: Long, fee: Long?) = modify(id) { it.copy(customMonthlyFee = fee) }
     override suspend fun delete(id: Long) = items.update { list -> list.filterNot { it.id == id } }
@@ -121,6 +126,14 @@ class FakeSettingsRepository(initial: AppSettings = AppSettings()) : SettingsRep
     override suspend fun setGlobalMonthlyFee(fee: Long) = state.update { it.copy(globalMonthlyFee = fee) }
     override suspend fun setDueDay(day: Int) = state.update { it.copy(dueDay = day) }
     override suspend fun setThemeMode(mode: ThemeMode) = state.update { it.copy(themeMode = mode) }
+    override suspend fun completeOnboarding(ownerName: String, globalMonthlyFee: Long, dueDay: Int) = state.update {
+        it.copy(
+            ownerName = ownerName.trim(),
+            globalMonthlyFee = globalMonthlyFee,
+            dueDay = dueDay.coerceIn(1, 28),
+            onboardingCompleted = true
+        )
+    }
 }
 
 object ImmediateTransactionRunner : id.my.selo.sekost.core.data.repository.TransactionRunner {
