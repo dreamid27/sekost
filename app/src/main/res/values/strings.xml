@@ -113,6 +113,8 @@
     <string name="room_no_occupant">Kamar ini belum berpenghuni.</string>
     <string name="room_add_occupant">Tambah penghuni</string>
     <string name="room_check_out">Checkout</string>
+    <string name="room_whatsapp">Chat WhatsApp</string>
+    <string name="room_whatsapp_unavailable">Tidak bisa membuka WhatsApp</string>
     <string name="room_payment">Pembayaran %1$s</string>
     <string name="room_mark_paid">Tandai lunas</string>
     <string name="room_mark_unpaid">Batalkan lunas</string>

@@ -131,6 +131,13 @@ object SekostIcons {
                 "c0 .83-.67 1.5-1.5 1.5A12.25 12.25 0 0 1 3.75 6c0-.83.67-1.5 1.5-1.5z",
         )
     }
+    val Chat by lazy {
+        lineIcon(
+            "Chat",
+            "M12 3.75a8.25 8.25 0 0 0-7.1 12.45L3.75 20.25l4.15-1.1A8.25 8.25 0 1 0 12 3.75z",
+            "M8.75 12h.5M11.75 12h.5M14.75 12h.5",
+        )
+    }
     val CheckOut by lazy {
         lineIcon(
             "CheckOut",

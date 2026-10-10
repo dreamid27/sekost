@@ -1,5 +1,8 @@
 package id.my.selo.sekost.feature.room
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,13 +31,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import id.my.selo.sekost.R
 import id.my.selo.sekost.core.common.Rupiah
+import id.my.selo.sekost.core.common.WhatsApp
 import id.my.selo.sekost.core.common.displayName
 import id.my.selo.sekost.core.designsystem.component.ButtonTone
 import id.my.selo.sekost.core.designsystem.component.ConfirmDialog
@@ -471,6 +477,10 @@ private fun OccupantCard(state: RoomDetailUiState.Ready, onAdd: () -> Unit, onEd
                 }
             }
             Spacer(Modifier.height(SekostTheme.spacing.md))
+            WhatsApp.chatUrl(tenant.phone)?.let { url ->
+                WhatsAppButton(url)
+                Spacer(Modifier.height(SekostTheme.spacing.sm))
+            }
             Row(horizontalArrangement = Arrangement.spacedBy(SekostTheme.spacing.sm)) {
                 SekostOutlinedButton(
                     stringResource(R.string.action_edit),
@@ -488,6 +498,25 @@ private fun OccupantCard(state: RoomDetailUiState.Ready, onAdd: () -> Unit, onEd
             }
         }
     }
+}
+
+@Composable
+private fun WhatsAppButton(url: String) {
+    val context = LocalContext.current
+    val unavailable = stringResource(R.string.room_whatsapp_unavailable)
+    SekostButton(
+        stringResource(R.string.room_whatsapp),
+        onClick = {
+            try {
+                context.startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
+            } catch (_: ActivityNotFoundException) {
+                Toast.makeText(context, unavailable, Toast.LENGTH_SHORT).show()
+            }
+        },
+        icon = SekostIcons.Chat,
+        tone = ButtonTone.Accent,
+        modifier = Modifier.fillMaxWidth().testTag("room_whatsapp"),
+    )
 }
 
 @Composable
