@@ -1,0 +1,189 @@
+<resources>
+    <string name="app_name">Sekost</string>
+    <string name="app_tagline">Kelola kost &amp; rumah sewa dengan tenang</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Beranda</string>
+    <string name="nav_billing">Tagihan</string>
+    <string name="nav_issues">Laporan</string>
+    <string name="nav_settings">Pengaturan</string>
+
+    <!-- Common -->
+    <string name="action_save">Simpan</string>
+    <string name="action_cancel">Batal</string>
+    <string name="action_delete">Hapus</string>
+    <string name="action_edit">Ubah</string>
+    <string name="action_back">Kembali</string>
+    <string name="action_add">Tambah</string>
+    <string name="per_month">/ bulan</string>
+    <string name="error_required">Wajib diisi</string>
+
+    <!-- Enums -->
+    <string name="status_vacant">Kosong</string>
+    <string name="status_occupied">Terisi</string>
+    <string name="status_maintenance">Perawatan</string>
+    <string name="property_type_kost">Kost</string>
+    <string name="property_type_house">Rumah Sewa</string>
+    <string name="issue_type_maintenance">Perawatan</string>
+    <string name="issue_type_complaint">Keluhan</string>
+    <string name="issue_status_open">Terbuka</string>
+    <string name="issue_status_resolved">Selesai</string>
+    <string name="payment_paid">Lunas</string>
+    <string name="payment_unpaid">Belum bayar</string>
+    <string name="payment_late">Terlambat</string>
+    <string name="fee_source_room">Tarif khusus kamar ini</string>
+    <string name="fee_source_property">Mengikuti tarif properti</string>
+    <string name="fee_source_global">Mengikuti tarif global</string>
+    <string name="theme_system">Sistem</string>
+    <string name="theme_light">Terang</string>
+    <string name="theme_dark">Gelap</string>
+
+    <!-- Home -->
+    <string name="greeting_morning">Selamat pagi</string>
+    <string name="greeting_afternoon">Selamat siang</string>
+    <string name="greeting_evening">Selamat sore</string>
+    <string name="greeting_night">Selamat malam</string>
+    <string name="greeting_with_name">%1$s, %2$s</string>
+    <string name="home_title">Ringkasan %1$s</string>
+    <string name="home_income_label">Pemasukan bulan ini</string>
+    <string name="home_income_of">dari %1$s yang diharapkan</string>
+    <string name="home_unpaid_count">%1$d belum bayar</string>
+    <string name="home_all_paid">Semua lunas</string>
+    <string name="home_occupancy">Hunian</string>
+    <string name="home_occupied_suffix">terisi</string>
+    <string name="home_rooms_count">%1$d kamar</string>
+    <string name="home_open_issues">Laporan aktif</string>
+    <string name="home_outstanding">Belum tertagih</string>
+    <string name="home_properties">Properti</string>
+    <string name="home_property_occupancy">%1$d/%2$d terisi</string>
+    <string name="home_empty_title">Mulai dengan properti pertamamu</string>
+    <string name="home_empty_body">Tambahkan kost atau rumah sewa, lalu atur kamar, penghuni, dan tagihan bulanan di satu tempat.</string>
+    <string name="home_add_property">Tambah properti</string>
+    <string name="home_try_sample">Coba dengan data contoh</string>
+
+    <!-- Property -->
+    <string name="property_new">Properti baru</string>
+    <string name="property_edit">Ubah properti</string>
+    <string name="property_name">Nama properti</string>
+    <string name="property_name_hint">mis. Kost Melati</string>
+    <string name="property_address">Alamat</string>
+    <string name="property_type">Jenis</string>
+    <string name="property_use_default_fee">Tarif default properti</string>
+    <string name="property_use_default_fee_desc">Jika mati, kamar mengikuti tarif global (%1$s).</string>
+    <string name="property_default_fee">Tarif default per kamar</string>
+    <string name="property_fee_follow_global">Ikuti tarif global · %1$s</string>
+    <string name="property_delete_title">Hapus properti?</string>
+    <string name="property_delete_message">\"%1$s\" beserta semua kamar, penghuni, pembayaran, dan laporannya akan dihapus permanen.</string>
+    <string name="property_filter_all">Semua</string>
+    <string name="property_rooms">Kamar</string>
+    <string name="property_add_room">Tambah kamar</string>
+    <string name="property_no_tenant">Belum ada penghuni</string>
+    <string name="property_empty_title">Belum ada kamar</string>
+    <string name="property_empty_body">Beri label untuk setiap kamar, mis. \"Kamar 01\" atau \"Lantai 2 - A\".</string>
+    <string name="property_filter_empty">Tidak ada kamar dengan status ini.</string>
+    <string name="property_default_fee_label">Tarif default</string>
+
+    <!-- Room -->
+    <string name="room_new">Kamar baru</string>
+    <string name="room_edit">Ubah kamar</string>
+    <string name="room_label">Label kamar</string>
+    <string name="room_label_hint">mis. Kamar 01</string>
+    <string name="room_floor">Lantai / blok (opsional)</string>
+    <string name="room_notes">Catatan (opsional)</string>
+    <string name="room_status">Status kamar</string>
+    <string name="room_fee">Tarif bulanan</string>
+    <string name="room_change_fee">Ubah tarif</string>
+    <string name="room_fee_sheet_subtitle">Atur tarif khusus atau ikuti tarif default.</string>
+    <string name="room_custom_fee_toggle">Gunakan tarif khusus</string>
+    <string name="room_custom_fee_inherit">Jika mati, kamar ini kembali ke tarif di atas.</string>
+    <string name="room_custom_fee">Tarif khusus</string>
+    <string name="room_occupant">Penghuni</string>
+    <string name="room_since">Sejak %1$s</string>
+    <string name="room_no_occupant">Kamar ini belum berpenghuni.</string>
+    <string name="room_add_occupant">Tambah penghuni</string>
+    <string name="room_check_out">Checkout</string>
+    <string name="room_payment">Pembayaran %1$s</string>
+    <string name="room_mark_paid">Tandai lunas</string>
+    <string name="room_mark_unpaid">Batalkan lunas</string>
+    <string name="room_paid_on">Dibayar %1$s</string>
+    <string name="room_due_on">Jatuh tempo %1$s</string>
+    <string name="room_payment_history">Riwayat pembayaran</string>
+    <string name="room_issues">Perawatan &amp; keluhan</string>
+    <string name="room_add_issue">Laporkan</string>
+    <string name="room_no_issues">Belum ada laporan untuk kamar ini.</string>
+    <string name="room_delete_title">Hapus kamar?</string>
+    <string name="room_delete_message">\"%1$s\" beserta riwayat penghuni, pembayaran, dan laporannya akan dihapus permanen.</string>
+    <string name="room_checkout_title">Checkout penghuni?</string>
+    <string name="room_checkout_message">%1$s akan di-checkout dan status kamar menjadi %2$s.</string>
+    <string name="room_maintenance_hint">Kamar dalam perawatan tidak ditagih.</string>
+    <string name="room_past_tenants">Penghuni sebelumnya</string>
+
+    <!-- Tenant -->
+    <string name="tenant_new">Penghuni baru</string>
+    <string name="tenant_edit">Ubah penghuni</string>
+    <string name="tenant_name">Nama penghuni</string>
+    <string name="tenant_phone">No. HP (opsional)</string>
+    <string name="tenant_check_in">Tanggal masuk</string>
+    <string name="tenant_check_in_today">Hari ini · %1$s</string>
+    <string name="tenant_check_in_subtitle">Status kamar akan otomatis menjadi Terisi.</string>
+
+    <!-- Issues -->
+    <string name="issue_new">Laporan baru</string>
+    <string name="issue_title">Judul</string>
+    <string name="issue_title_hint">mis. Lampu kamar mandi mati</string>
+    <string name="issue_description">Detail (opsional)</string>
+    <string name="issue_room">Kamar</string>
+    <string name="issue_room_pick">Pilih kamar</string>
+    <string name="issue_mark_resolved">Tandai selesai</string>
+    <string name="issue_reopen">Buka lagi</string>
+    <string name="issue_delete_title">Hapus laporan?</string>
+    <string name="issue_delete_message">\"%1$s\" akan dihapus permanen.</string>
+    <string name="issue_reported_on">Dilaporkan %1$s</string>
+    <string name="issue_resolved_on">Selesai %1$s</string>
+    <string name="issues_overline">Laporan</string>
+    <string name="issues_title">Perawatan &amp; Keluhan</string>
+    <string name="issues_empty_title">Semua aman terkendali</string>
+    <string name="issues_empty_body">Tidak ada perawatan atau keluhan yang perlu ditangani.</string>
+    <string name="issues_empty_resolved">Belum ada laporan yang selesai.</string>
+    <string name="issues_need_room">Tambahkan kamar terlebih dahulu untuk membuat laporan.</string>
+    <string name="issue_type_all">Semua jenis</string>
+
+    <!-- Billing -->
+    <string name="billing_overline">Tagihan</string>
+    <string name="billing_title">Pembayaran</string>
+    <string name="billing_prev_month">Bulan sebelumnya</string>
+    <string name="billing_next_month">Bulan berikutnya</string>
+    <string name="billing_collected">Terkumpul</string>
+    <string name="billing_outstanding">Sisa %1$s</string>
+    <string name="billing_paid_count">%1$d lunas</string>
+    <string name="billing_unpaid_count">%1$d belum</string>
+    <string name="billing_filter_unpaid">Belum bayar</string>
+    <string name="billing_filter_paid">Lunas</string>
+    <string name="billing_filter_all">Semua</string>
+    <string name="billing_all_paid_title">Semua sudah lunas!</string>
+    <string name="billing_all_paid_body">Tidak ada tagihan tertunggak untuk %1$s.</string>
+    <string name="billing_empty_title">Belum ada kamar terisi</string>
+    <string name="billing_empty_body">Tagihan muncul otomatis untuk setiap kamar yang memiliki penghuni.</string>
+    <string name="billing_none_paid">Belum ada pembayaran di bulan ini.</string>
+    <string name="billing_due_info">Jatuh tempo tanggal %1$d setiap bulan</string>
+
+    <!-- Settings -->
+    <string name="settings_overline">Pengaturan</string>
+    <string name="settings_title">Atur Sekost</string>
+    <string name="settings_owner">Nama pemilik</string>
+    <string name="settings_owner_empty">Belum diatur</string>
+    <string name="settings_owner_hint">Dipakai untuk sapaan di beranda.</string>
+    <string name="settings_billing_section">Tarif &amp; tagihan</string>
+    <string name="settings_global_fee">Tarif global</string>
+    <string name="settings_global_fee_desc">Dipakai oleh properti dan kamar yang tidak memiliki tarif sendiri.</string>
+    <string name="settings_due_day">Tanggal jatuh tempo</string>
+    <string name="settings_due_day_value">Tanggal %1$d setiap bulan</string>
+    <string name="settings_due_day_desc">Tagihan yang belum dibayar setelah tanggal ini ditandai terlambat.</string>
+    <string name="settings_decrease">Kurangi</string>
+    <string name="settings_increase">Tambah</string>
+    <string name="settings_appearance">Tampilan</string>
+    <string name="settings_theme">Tema</string>
+    <string name="settings_about">Tentang</string>
+    <string name="settings_version">Versi %1$s</string>
+    <string name="settings_profile">Profil</string>
+</resources>

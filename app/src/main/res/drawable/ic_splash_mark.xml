@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Splash icon: 240dp canvas, mark must fit the inner 160dp circle. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
+    <path android:fillColor="@color/jade_700" android:pathData="M84,72 h72 a12,12 0 0 1 12,12 v72 a12,12 0 0 1 -12,12 h-72 a12,12 0 0 1 -12,-12 v-72 a12,12 0 0 1 12,-12 z" />
+    <path
+        android:pathData="M92,116 L120,92 L148,116"
+        android:strokeWidth="9"
+        android:strokeColor="@color/genteng_500"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path android:fillColor="@color/krem_50" android:pathData="M107,150 L107,133 A13,13 0 0,1 133,133 L133,150 Z" />
+</vector>

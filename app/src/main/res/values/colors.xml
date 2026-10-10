@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Mirrors core/designsystem/theme/Palette.kt for XML-only surfaces (launcher, splash). -->
+    <color name="jade_700">#FF1F5247</color>
+    <color name="jade_900">#FF12302A</color>
+    <color name="genteng_500">#FFCB6D45</color>
+    <color name="krem_50">#FFFCFAF6</color>
+    <color name="krem_100">#FFF7F2EA</color>
+    <color name="malam_950">#FF0F1412</color>
+</resources>

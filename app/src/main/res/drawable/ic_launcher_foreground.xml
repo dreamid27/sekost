@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- roof chevron (terracotta) -->
+    <path
+        android:pathData="M32,52 L54,33 L76,52"
+        android:strokeWidth="7.5"
+        android:strokeColor="@color/genteng_500"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <!-- arched door (cream) -->
+    <path
+        android:fillColor="@color/krem_50"
+        android:pathData="M44,77 L44,64 A10,10 0 0,1 64,64 L64,77 Z" />
+    <!-- door knob -->
+    <path
+        android:fillColor="@color/genteng_500"
+        android:pathData="M58.5,68.5 m-2.2,0 a2.2,2.2 0 1,0 4.4,0 a2.2,2.2 0 1,0 -4.4,0" />
+</vector>
